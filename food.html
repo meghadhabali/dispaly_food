@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Food</title>
+    <style>
+         .dimension {
+            height : 500px;
+            width:100%;
+        } 
+    </style>
+</head>
+<body>
+<script>   
+async function foo() {
+    try {
+        let resp = await fetch("https://foodish-api.herokuapp.com/api/");
+        let data1 = await resp.json();
+        let word = data1.image;
+        var word_split = word.split("/");
+        console.log(word_split[4]);
+        if(word) {
+            let object =  document.createElement("object");
+            object.setAttribute('class',"dimension");
+            let h1 = document.createElement("h1");
+            let title = document.createElement("marquee");
+            title.innerHTML = word_split[4];
+            h1.append(title);
+            object.data = word;
+            document.body.append(h1,object);
+
+        }
+        else { 
+            document.body.appendChild("No Data");
+        }
+    }
+    catch (error ){
+        console.log(error);
+    }
+}
+foo();
+
+
+
+
+
+
+
+
+
+
+    
+</script>
+</body>
+</html>
